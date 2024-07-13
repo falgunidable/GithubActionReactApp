@@ -3,11 +3,14 @@ name: Github Pages Deploy
 on:
   push:
     branches:
-      - master
+      - "master"
 
 jobs:
   build:
     runs-on: self-hosted
+
+    strategy:
+      node-version: [15.x]
 
     steps:
       - name: Checkout
@@ -17,7 +20,7 @@ jobs:
         run: npm install && npm run build
 
       - name: Deploy
-        uses: falgunidable/GitHub-Pages-deploy@3.2.2
+        uses: Cecilapp/GitHub-Pages-deploy@3.2.2
         with:
           branch: gh-pages
           folder: build
