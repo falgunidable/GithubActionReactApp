@@ -33,8 +33,11 @@ jobs:
         run: |
           curl -fsSL https://nodejs.org/dist/v18.20.4/node-v18.20.4-win-x64.zip -o nodejs.zip
           mkdir -p $RUNNER_TOOL_CACHE/Node/18.20.4/x64
-          unzip nodejs.zip -d $RUNNER_TOOL_CACHE/Node/18.20.4/x64
+          Expand-Archive nodejs.zip -DestinationPath $RUNNER_TOOL_CACHE/Node/18.20.4/x64
           echo "##vso[task.prependpath]$RUNNER_TOOL_CACHE/Node/18.20.4/x64"
+        shell: pwsh
+        env:
+          RUNNER_TOOL_CACHE: $env:RUNNER_TOOL_CACHE
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
